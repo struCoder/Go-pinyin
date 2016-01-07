@@ -8,13 +8,19 @@ Install
 
 In you project root path just run `go get github.com/struCoder/Go-pinyin`
 
+
+Test
+====
+just run `go test`
+
+
 How to Use
 ===========
-```golang
+```go
 
 import (
   "fmt"
-  "github.com/struCoder/Go-pinyin/src/pinyin"
+  "github.com/struCoder/Go-pinyin"
 )
 
 func main() {
