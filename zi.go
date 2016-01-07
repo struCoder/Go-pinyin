@@ -1,11 +1,16 @@
-package pinyin
+package pinyingo
 
+import (
+  "strings"
+)
 var dict = make([]string, 200000)
+var INITIALS []string
 
 func get(index int) string{
   return dict[index]
 }
 func init() {
+  INITIALS = strings.Split("b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,zh,ch,sh,z,c,s", ",")
   dict[0x3400] = "qiū" /* 㐀 */
   dict[0x3401] = "tiǎn,tiàn" /* 㐁 */
   dict[0x3402] = "xǐ" /* 㐂 */
