@@ -5,7 +5,7 @@ import (
 )
 
 func TestConvert(t *testing.T) {
-  pinyinMap := map[string]interface{}{
+  pinyinMap := map[string][]string{
     "hello中国": []string{"hello", "zhōng", "guó"},
     "中国hello": []string{"zhōng", "guó", "hello"},
     "中国":      []string{"zhōng", "guó"},
@@ -13,9 +13,12 @@ func TestConvert(t *testing.T) {
   }
 
   for k, v := range pinyinMap {
-    converted := Convert(k)
-    if converted != v {
-      t.Errorf("%s is not equal %s", converted, v)
+    py := NewPy()
+    converted := py.Convert(k)
+    for i := 0; i < len(converted); i++ {
+      if converted[i] != v[i] {
+        t.Errorf("%s is not equal %s", converted, v)
+      }
     }
   }
 }
