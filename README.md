@@ -30,6 +30,14 @@ func main() {
 }
 
 ```
+
+Features
+====
+[x]  convert han zi to pinyin
+[ ]  get han zi initial
+[ ]  deal with heteronym
+
+
 License
 ========
 #### MIT
