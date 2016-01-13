@@ -24,8 +24,10 @@ import (
 )
 
 func main() {
-  str := "中文字符-汉语拼音"
-  py := pinyin.NewPy()
+  str := "中国"
+  py := pinyingo.NewPy(pinyingo.STYLE_TONE)       //string with tone        -> 中国: ["zhōng", "guó"]
+  //py := pinyingo.NewPy(pinyingo.STYLE_NORMAL)   //string without tone     -> 中国: ["zhong", "guo"]
+  //py := pinyingo.NewPy(pinyingo.STYLE_INITIALS) // get initials of string -> 中国: ["zh", "g"]
   fmt.Println(py.Convert(str))
 }
 
@@ -33,9 +35,9 @@ func main() {
 
 Features
 ====
--  [x] convert han zi to pinyin  
--  [ ] get han zi initial  
--  [ ] deal with heteronym  
+-  [x] convert han zi to pinyin
+-  [x] get han zi initial
+-  [ ] deal with heteronym
 
 
 License
