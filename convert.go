@@ -5,8 +5,6 @@ import (
   "unicode/utf8"
 )
 
-// var reg = regexp.MustCompile("^[\u4e00-\u9fa5]$")
-
 type options struct {
   heteronym bool
   style     int
@@ -14,17 +12,20 @@ type options struct {
 }
 
 func (this *options) perStr(pinyinStrs string) string {
-  //首字母
-  if this.style == 1 {
+  switch this.style {
+  case STYLE_INITIALS:
     for i := 0; i < len(INITIALS); i++ {
       if strings.Index(pinyinStrs, INITIALS[i]) == 0 {
         return INITIALS[i]
       }
     }
     return ""
-  } else if this.style == 0 {
+  case STYLE_TONE:
     ret := strings.Split(pinyinStrs, ",")
     return ret[0]
+  case STYLE_NORMAL:
+    ret := strings.Split(pinyinStrs, ",")
+    return normalStr(ret[0])
   }
   return ""
 }
@@ -59,6 +60,6 @@ func (this *options) Convert(strs string) []string {
   return retArr
 }
 
-func NewPy() *options {
-  return &options{false, 0, false}
+func NewPy(style int) *options {
+  return &options{false, style, false}
 }
