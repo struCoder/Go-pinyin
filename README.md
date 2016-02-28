@@ -11,7 +11,16 @@ In you project root path just run `go get github.com/struCoder/Go-pinyin`
 
 Test
 ====
-just run `go test`
+if you want to run `go test` you should open tools.go file and change getDictPath function to
+```golang
+func getDictPath() string {
+  currentPath, _ := os.Getwd()
+  return currentPath + "/dict/"
+}
+
+```
+
+and also if you have good idea to avoid this way, I'd appreciate any ideas you could give me!
 
 
 How to Use
@@ -25,9 +34,14 @@ import (
 
 func main() {
   str := "中国"
-  py := pinyingo.NewPy(pinyingo.STYLE_TONE)       //string with tone        -> 中国: ["zhōng", "guó"]
-  //py := pinyingo.NewPy(pinyingo.STYLE_NORMAL)   //string without tone     -> 中国: ["zhong", "guo"]
-  //py := pinyingo.NewPy(pinyingo.STYLE_INITIALS) // get initials of string -> 中国: ["zh", "g"]
+  str1 := "重阳"
+  py := pinyingo.NewPy(pinyingo.STYLE_TONE, pinyingo.NO_SEGMENT)       //string with tone        -> 中国: ["zhōng", "guó"]
+  //py := pinyingo.NewPy(pinyingo.STYLE_NORMAL, pinyingo.NO_SEGMENT)   //string without tone     -> 中国: ["zhong", "guo"]
+  //py := pinyingo.NewPy(pinyingo.STYLE_INITIALS, pinyingo.NO_SEGMENT) // get initials of string -> 中国: ["zh", "g"]
+
+  //segment
+  py := pinyingo.NewPy(pinyingo.STYLE_TONE, pinyingo.USE_SEGMENT)       //string with tone        -> 中国: ["chóng", "yáng"]
+
   fmt.Println(py.Convert(str))
 }
 
@@ -37,7 +51,7 @@ Features
 ====
 -  [x] convert han zi to pinyin
 -  [x] get han zi initial
--  [ ] deal with heteronym
+-  [x] deal with segment
 
 
 License
