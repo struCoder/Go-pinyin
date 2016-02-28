@@ -67,7 +67,7 @@ func (this *options) Convert(strs string) []string {
       mapValuesArr, exist := phrasesDict[item]
       if exist {
         for _, v := range mapValuesArr {
-          retArr = append(retArr, v)
+          retArr = append(retArr, this.perStr(v))
         }
       } else {
         converted := this.doConvert(item)
