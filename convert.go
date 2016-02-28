@@ -6,9 +6,9 @@ import (
 )
 
 type options struct {
-  heteronym bool
   style     int
   segment   bool
+  heteronym bool
 }
 
 func (this *options) perStr(pinyinStrs string) string {
@@ -30,10 +30,10 @@ func (this *options) perStr(pinyinStrs string) string {
   return ""
 }
 
-func (this *options) Convert(strs string) []string {
+func (this *options) doConvert(strs string) []string {
   //获取字符串的长度
   bytes := []byte(strs)
-  retArr := make([]string, 0)
+  pinyinArr := make([]string, 0)
   nohans := ""
   var tempStr string
   var single string
@@ -47,19 +47,42 @@ func (this *options) Convert(strs string) []string {
       nohans += tempStr
     } else {
       if len(nohans) > 0 {
-        retArr = append(retArr, nohans)
+        pinyinArr = append(pinyinArr, nohans)
         nohans = ""
       }
-      retArr = append(retArr, this.perStr(single))
+      pinyinArr = append(pinyinArr, this.perStr(single))
     }
   }
   //处理末尾非中文的字符串
   if len(nohans) > 0 {
-    retArr = append(retArr, nohans)
+    pinyinArr = append(pinyinArr, nohans)
   }
+  return pinyinArr
+}
+func (this *options) Convert(strs string) []string {
+  retArr := make([]string, 0)
+  if this.segment {
+    jiebaed := jieba.Cut(strs, use_hmm)
+    for _, item := range jiebaed {
+      mapValuesArr, exist := phrasesDict[item]
+      if exist {
+        for _, v := range mapValuesArr {
+          retArr = append(retArr, v)
+        }
+      } else {
+        converted := this.doConvert(item)
+        for _, v := range converted {
+          retArr = append(retArr, v)
+        }
+      }
+    }
+  } else {
+    retArr = this.doConvert(strs)
+  }
+
   return retArr
 }
 
-func NewPy(style int) *options {
-  return &options{false, style, false}
+func NewPy(style int, segment bool) *options {
+  return &options{style, segment, false}
 }
