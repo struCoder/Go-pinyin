@@ -1,7 +1,9 @@
 package pinyingo
 
 import (
+  "encoding/json"
   "github.com/yanyiwu/gojieba"
+  "log"
   "os"
   "regexp"
   "strings"
@@ -17,6 +19,7 @@ const (
   use_hmm            = true
 )
 
+var phrasesDict map[string]string
 var reg *regexp.Regexp
 var INITIALS []string = strings.Split("b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,zh,ch,sh,z,c,s", ",")
 var keyString string
@@ -55,8 +58,12 @@ func init() {
   keyString = getMapKeys()
   reg = regexp.MustCompile("([" + keyString + "])")
   dictPath := getDictPath()
+
   //初始化时将gojieba实例化到内存
   jieba = gojieba.NewJieba(dictPath+"jieba.dict.utf8", dictPath+"hmm_model.utf8", dictPath+"user.dict.utf8")
+
+  //初始化多音字到内存
+  initPhrases()
 }
 
 func getMapKeys() string {
@@ -76,4 +83,17 @@ func normalStr(str string) string {
 func getDictPath() string {
   currentPath, _ := os.Getwd()
   return currentPath + "/src/github.com/struCoder/Go-pinyin/dict/"
+}
+
+func initPhrases() {
+  currentPath, _ := os.Getwd()
+  f, err := os.Open(currentPath + "/src/github.com/struCoder/Go-pinyin/phrases-dict")
+  defer f.Close()
+  if err != nil {
+    log.Fatal(err)
+  }
+  decoder := json.NewDecoder(f)
+  if err := decoder.Decode(&phrasesDict); err != nil {
+    log.Fatal(err)
+  }
 }

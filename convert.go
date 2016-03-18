@@ -64,7 +64,8 @@ func (this *options) Convert(strs string) []string {
   if this.segment {
     jiebaed := jieba.Cut(strs, use_hmm)
     for _, item := range jiebaed {
-      mapValuesArr, exist := phrasesDict[item]
+      mapValuesStr, exist := phrasesDict[item]
+      mapValuesArr := strings.Split(mapValuesStr, ",")
       if exist {
         for _, v := range mapValuesArr {
           retArr = append(retArr, this.perStr(v))
