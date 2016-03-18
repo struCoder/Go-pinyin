@@ -3,6 +3,14 @@ Han yu pin yin package for Golang
 
 Get Pinyin Of Simplified Chinese
 
+
+Change log
+============
+
+#### 2016-03-18
+1. optimize performance(resolve out of slice len when building)
+
+
 Install
 ========
 
