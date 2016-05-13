@@ -64,7 +64,7 @@ Features
 
 support this project :)
 =======================
-![pay to me](http://7xjbiz.com1.z0.glb.clouddn.com/me/cEKqrjQYK8xnzzsY)
+![pay to me](http://7xjbiz.com1.z0.glb.clouddn.com/me/cEKqrjQYK8xnzzsY?imageView2/0/w/480)
 
 License
 ========
