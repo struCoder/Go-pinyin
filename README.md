@@ -62,6 +62,10 @@ Features
 -  [x] deal with segment
 
 
+support this project :)
+=======================
+![pay to me](http://7xjbiz.com1.z0.glb.clouddn.com/me/cEKqrjQYK8xnzzsY)
+
 License
 ========
 #### MIT
