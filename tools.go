@@ -5,11 +5,12 @@ import (
   "github.com/yanyiwu/gojieba"
   "log"
   "os"
+  "path"
   "regexp"
   "strings"
 )
 
-const (
+var (
   STYLE_NORMAL       = 1
   STYLE_TONE         = 2
   STYLE_INITIALS     = 3
@@ -17,6 +18,8 @@ const (
   USE_SEGMENT        = true
   NO_SEGMENT         = false
   use_hmm            = true
+  DICT_DIR           = path.Join(os.Getenv("GOPATH"), "src/github.com/struCoder/Go-pinyin/dict")
+  DICT_PHRASES       = path.Join(DICT_DIR, "phrases-dict")
 )
 
 var phrasesDict map[string]string
@@ -57,10 +60,9 @@ var sympolMap = map[string]string{
 func init() {
   keyString = getMapKeys()
   reg = regexp.MustCompile("([" + keyString + "])")
-  dictPath := getDictPath()
 
   //初始化时将gojieba实例化到内存
-  jieba = gojieba.NewJieba(dictPath+"jieba.dict.utf8", dictPath+"hmm_model.utf8", dictPath+"user.dict.utf8")
+  jieba = gojieba.NewJieba()
 
   //初始化多音字到内存
   initPhrases()
@@ -79,15 +81,8 @@ func normalStr(str string) string {
   return strings.Replace(str, findRet, string([]byte(sympolMap[findRet])[0]), -1)
 }
 
-//获取文件所在的根目录
-func getDictPath() string {
-  currentPath, _ := os.Getwd()
-  return currentPath + "/src/github.com/struCoder/Go-pinyin/dict/"
-}
-
 func initPhrases() {
-  currentPath, _ := os.Getwd()
-  f, err := os.Open(currentPath + "/src/github.com/struCoder/Go-pinyin/phrases-dict")
+  f, err := os.Open(DICT_PHRASES)
   defer f.Close()
   if err != nil {
     log.Fatal(err)

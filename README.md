@@ -6,6 +6,8 @@ Get Pinyin Of Simplified Chinese
 
 Change log
 ============
+#### 2016-06-21
+1. optimized code
 
 #### 2016-03-18
 1. optimize performance(resolve out of slice len when building)
@@ -19,12 +21,8 @@ In you project root path just run `go get github.com/struCoder/Go-pinyin`
 
 Test
 ====
-if you want to run `go test` you should open tools.go file and change getDictPath function to
-```golang
-func getDictPath() string {
-  currentPath, _ := os.Getwd()
-  return currentPath + "/dict/"
-}
+```bash
+go test
 
 ```
 
