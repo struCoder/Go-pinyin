@@ -26,8 +26,6 @@ go test
 
 ```
 
-and also if you have good idea to avoid this way, I'd appreciate any ideas you could give me!
-
 
 How to Use
 ===========
