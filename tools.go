@@ -78,6 +78,9 @@ func getMapKeys() string {
 
 func normalStr(str string) string {
   findRet := reg.FindString(str)
+  if findRet == "" {
+    return str
+  }
   return strings.Replace(str, findRet, string([]byte(sympolMap[findRet])[0]), -1)
 }
 
