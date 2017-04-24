@@ -6,6 +6,10 @@ Get Pinyin Of Simplified Chinese
 
 Change log
 ============
+
+#### 2017-04-24
+1. fix STYLE\_FIRST\_LETTER
+
 #### 2016-06-21
 1. optimized code
 
