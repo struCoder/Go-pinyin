@@ -64,7 +64,9 @@ Features
 
 support this project :)
 =======================
-![pay to me](http://7xjbiz.com1.z0.glb.clouddn.com/me/cEKqrjQYK8xnzzsY?imageView2/0/w/480)
+|      **Paypal**       |        **Alipay**         |
+| :------------------------: | :------------------------: |
+| [![paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/strucoder) | [![alipay](https://img.shields.io/badge/Donate-alipay-blue.svg)](https://i.loli.net/2018/11/29/5bff95e2d29df.png) |
 
 License
 ========
